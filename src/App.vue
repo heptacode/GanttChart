@@ -159,7 +159,7 @@ export default class App extends Vue {
   }
 
   del(idx: number | null) {
-    this.tasks.splice(idx || this.idx, 1);
+    this.tasks.splice(!!idx ? idx : this.idx, 1);
     this.dialog = false;
   }
 
