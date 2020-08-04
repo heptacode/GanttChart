@@ -19,7 +19,7 @@
         <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-container v-if="windowWidth > 750" style="margin-top:60px">
+    <v-container v-if="windowWidth > 750">
       <v-sheet v-if="!tasks.length" class="mt-5 text-h2 text-center">
         Woohoo, no work to do!
         <v-img src="https://s.starladder.com/uploads/team_logo/6/3/0/e/thumb_270_c799626b431b7a56207be0d3d3a004ad.jpg" alt="Woohoo" aspect-ratio="2.5" contain></v-img>
@@ -29,13 +29,13 @@
         <v-col v-for="i in 11" :key="i" cols="1" class="elevation-1 text-center">{{ i }}일</v-col>
       </v-row>
       <v-row v-for="(item, idx) in tasks" :key="idx" class="d-flex align-center justify-center text-center">
-        <v-col cols="1" class="elevation-1 text-center" @click="edit(idx)" @contextmenu="del(idx)" style="user-select:none;cursor:pointer">{{ item.name }}</v-col>
+        <v-col cols="1" class="elevation-1 text-center pointer" @click="edit(idx)" @contextmenu="del(idx)">{{ item.name }}</v-col>
         <v-col v-if="item.blank" :cols="item.blank" class="d-block"></v-col>
-        <v-col :cols="item.term" class="d-block lighten-4 elevation-3" :class="barColor(idx)" @click="edit(idx)" @contextmenu="del(idx)" style="cursor:pointer">{{ item.term }}일</v-col>
+        <v-col :cols="item.term" class="d-block lighten-4 elevation-3 pointer" :class="barColor(idx)" @click="edit(idx)" @contextmenu="del(idx)">{{ item.term }}일</v-col>
         <v-col v-if="item.blank + item.term != 11"></v-col>
       </v-row>
     </v-container>
-    <v-container v-else style="margin-top:60px">
+    <v-container>
       <v-sheet class="mt-5 text-h4 text-center">
         화면이 너무 좁아요. 가로로 기울여보세요!
         <v-icon class="mt-5 d-block" x-large>mdi-phone-rotate-landscape</v-icon>
@@ -230,15 +230,25 @@ export default class App extends Vue {
 
   font-size: 1em;
 }
+
 html {
   width: 100%;
   height: 100vh;
   word-break: keep-all;
+  user-select: none;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
   overflow-x: hidden;
   overflow-y: auto;
+}
+
+v-container {
+  margin-top: 60px;
+}
+
+.pointer {
+  cursor: pointer;
 }
 </style>
