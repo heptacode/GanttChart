@@ -35,7 +35,7 @@
         <v-col v-if="item.blank + item.term != 11"></v-col>
       </v-row>
     </v-container>
-    <v-container>
+    <v-container v-else>
       <v-sheet class="mt-5 text-h4 text-center">
         화면이 너무 좁아요. 가로로 기울여보세요!
         <v-icon class="mt-5 d-block" x-large>mdi-phone-rotate-landscape</v-icon>
@@ -111,7 +111,7 @@ export default class App extends Vue {
   }
   @Watch("dialog")
   isDialogChanged() {
-    if (this.dialog == false) {
+    if (!this.dialog) {
       this.task = { name: "", blank: 0, term: 1 };
     }
   }
@@ -244,7 +244,7 @@ html {
   overflow-y: auto;
 }
 
-v-container {
+.container {
   margin-top: 60px;
 }
 
