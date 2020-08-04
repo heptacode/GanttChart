@@ -19,7 +19,7 @@
         <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>
-    <v-container style="margin-top:60px">
+    <v-container v-if="windowWidth > 750" style="margin-top:60px">
       <v-sheet v-if="!tasks.length" class="mt-5 text-h2 text-center">
         Woohoo, no work to do!
         <v-img src="https://s.starladder.com/uploads/team_logo/6/3/0/e/thumb_270_c799626b431b7a56207be0d3d3a004ad.jpg" alt="Woohoo" aspect-ratio="2.5" contain></v-img>
@@ -35,8 +35,13 @@
         <v-col v-if="item.blank + item.term != 11"></v-col>
       </v-row>
     </v-container>
+    <v-container v-else style="margin-top:60px">
+      <v-sheet class="mt-5 text-h4 text-center">
+        화면이 너무 좁아요. 가로로 기울여보세요!
+        <v-icon class="mt-5 d-block" x-large>mdi-phone-rotate-landscape</v-icon>
+      </v-sheet>
+    </v-container>
     <v-btn fixed bottom right fab color="indigo" dark @click="add"><v-icon>mdi-plus</v-icon></v-btn>
-
     <!-- Dialog -->
 
     <v-dialog v-model="dialog" :persistent="method == 2 && !task.name.trim()" max-width="600px">
@@ -85,6 +90,7 @@ import { Component, Vue, Prop, Watch } from "vue-property-decorator";
 
 @Component({})
 export default class App extends Vue {
+  windowWidth = window.innerWidth;
   dialog = false;
   method = 1;
   alert = false;
@@ -112,6 +118,13 @@ export default class App extends Vue {
 
   created() {
     this.fillFavorites();
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+    });
+  }
+
+  onResize() {
+    this.windowWidth = window.innerWidth;
   }
 
   barColor(idx: number) {
