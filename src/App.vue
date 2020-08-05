@@ -72,7 +72,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn v-if="method == 2" color="red darken-1" text type="reset" @click="del">삭제</v-btn>
+            <v-btn v-if="method == 2" color="red darken-1" text type="reset" @click="del(null)">삭제</v-btn>
             <v-btn color="blue darken-1" text type="reset" @click="dialog = false">닫기</v-btn>
             <v-btn v-if="method == 1" color="blue darken-1" text type="submit">승인</v-btn>
           </v-card-actions>
@@ -159,7 +159,7 @@ export default class App extends Vue {
   }
 
   del(idx: number | null) {
-    this.tasks.splice(!!idx ? idx : this.idx, 1);
+    this.tasks.splice(idx || this.idx, 1);
     this.dialog = false;
   }
 
