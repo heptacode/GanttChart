@@ -15,7 +15,7 @@
       <v-btn icon @click="deleteTasks">
         <v-icon>mdi-calendar-remove</v-icon>
       </v-btn>
-      <v-btn icon href="https://github.com/heptacode/GanttChart">
+      <v-btn icon href="https://github.com/heptacode/ganttchart">
         <v-icon>mdi-github</v-icon>
       </v-btn>
     </v-app-bar>
